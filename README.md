@@ -1,7 +1,7 @@
 # pixi
 
-> A pixi.js project
-> Use pixi.js to load the data generated from fabric.js
+- A pixi.js project
+- Use pixi.js to load the data generated from fabric.js
 
 ## Run Setup
 
