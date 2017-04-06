@@ -1,0 +1,66 @@
+{
+    "type": "path",
+    "originX": "left",
+    "originY": "top",
+    "left": 399,
+    "top": 218,
+    "width": 300,
+    "height": 300,
+    "fill": "#961B1E",
+    "stroke": null,
+    "strokeWidth": 1,
+    "strokeDashArray": null,
+    "strokeLineCap": "butt",
+    "strokeLineJoin": "miter",
+    "strokeMiterLimit": 10,
+    "scaleX": 2,
+    "scaleY": 2,
+    "angle": 0,
+    "flipX": false,
+    "flipY": false,
+    "opacity": 1,
+    "shadow": null,
+    "visible": true,
+    "clipTo": null,
+    "backgroundColor": "",
+    "fillRule": "nonzero",
+    "globalCompositeOperation": "source-over",
+    "transformMatrix": [
+        1,
+        0,
+        0,
+        1,
+        0.32,
+        0.44
+    ],
+    "skewX": 0,
+    "skewY": 0,
+    "pathOffset": {
+        "x": 93.5,
+        "y": 56.56
+    },
+    "path": [
+        [
+            "M",
+            142.42,
+            105.43
+        ],
+        [
+            "V",
+            28.69
+        ],
+        [
+            "c",
+            0,
+            -11.65,
+            -9.45,
+            -21,
+            -21,
+            -21
+        ],
+        [
+            "H",
+            44.58
+        ]
+    ]
+}
