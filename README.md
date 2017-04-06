@@ -1,8 +1,9 @@
 # pixi
 
 > A pixi.js project
+> Use pixi.js to load the data generated from fabric.js
 
-## Build Setup
+## Run Setup
 
 ``` bash
 # install dependencies
