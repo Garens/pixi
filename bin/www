@@ -8,12 +8,13 @@ var app = require('../app');
 var debug = require('debug')('pixi:server');
 var http = require('http');
 var opn = require('opn');
+var config = require('../config.js');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3009');
+var port = normalizePort(process.env.PORT || config.webPort);
 app.set('port', port);
 
 /**

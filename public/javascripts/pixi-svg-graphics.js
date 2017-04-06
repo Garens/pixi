@@ -93,7 +93,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 			return
 		}
-		console.log(capitalizedTagName);
+		// console.log(capitalizedTagName);
 		// console.log(capitalizedTagName);
 	  if (!this['draw' + capitalizedTagName + 'Node']) {
 	    console.warn('No drawing behavior for ' + capitalizedTagName + ' node')
@@ -256,7 +256,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param  {SVGPathElement} node
 	 */
 	SVGGraphics.prototype.drawPathNode = function (node) {
-		console.log(node);
+		// console.log(node);
 	  this.applySvgAttributes(node)
 	  var d = node.getAttribute('d').trim()
 	  var commands = d.match(/[a-df-z][^a-df-z]*/ig)
@@ -266,7 +266,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var triangles = []
 	  var j, argslen
 	  var lastPathCoord
-		console.log(commands);
+		// console.log(commands);
 	  for (var i = 0, len = commands.length; i < len; i++) {
 	    command = commands[i]
 	    var commandType = command[0]
@@ -405,7 +405,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	SVGGraphics.prototype.applySvgAttributes = function (node) {
 	  var attributes = {}
-		console.log(node);
+		// console.log(node);
 
 	  // Get node attributes
 	  var i = node.attributes.length
@@ -479,7 +479,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	SVGGraphics.drawSVG = function (graphics, svg) {
 	  var svgGraphics = new SVGGraphics(graphics)
 	  var children = svg.children || svg.childNodes
-		console.log(1111,children);
 	  for (var i = 0, len = children.length; i < len; i++) {
 	    if (children[i].nodeType !== 1) { continue }
 	    svgGraphics.drawNode(children[i])

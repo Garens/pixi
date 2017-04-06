@@ -2,7 +2,9 @@
 new Vue({
   el: '#app',
   data:{
-    title:'test'
+    title:'test',
+    container:'',
+    app:''
   },
   mounted: function () {
     this.$nextTick(function () {
@@ -12,18 +14,50 @@ new Vue({
     })
   },
   methods:{
+    /**
+     * 初始化pixijs的方法
+     * @return {Object} container pixi的容器
+     * @return {Object} app pixi主要对象
+     */
     initPixi:function(){
       this.container = new PIXI.Container();
       this.app = new PIXI.autoDetectRenderer(1000, 800, {backgroundColor : '0x103300'});
       document.getElementById('app').appendChild(this.app.view);
     },
+    /**
+     * 获取json数据
+     * @return {[type]} [description]
+     */
     getJsonData:function(){
-      this.$http.get('/json/data.json').then(function(res){
-        var obj = res.body;
-        // console.log(obj);
-        this.renderPath(obj);
-      });
+      //使用vue-source方式获取
+      // this.$http.get('/json/data.json').then(function(res){
+      //   var obj = res.body;
+      //   // console.log(obj);
+      //   this.renderPath(obj);
+      // });
+      //使用vue-source方式获取
+      this.$http.get('/getDeviceList').then(function(res){
+        // console.log(res);
+      })
+      var _this = this;
+      //使用axios插件发送get请求到后台请求数据
+      axios.get('/getDeviceList').then(function(res){
+        var objs = res.data;
+        for(var i in objs){
+          // console.log(objs[i].type);
+          var obj = JSON.parse(objs[i].data);
+          // console.log(obj);
+          if(objs[i].type == "path"){
+            _this.renderPath(obj);
+          }
+        }
+      })
     },
+    /**
+     * 渲染路径的方法 type="path"
+     * @param  {[type]} obj [description]
+     * @return {[type]}     [description]
+     */
     renderPath:function(obj){
       var path = obj.path;
       var str = '';
