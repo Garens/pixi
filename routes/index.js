@@ -7,6 +7,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'pixi.js' });
 });
 
+router.get('/demo1', function(req, res, next) {
+  res.render('demo1', { title: 'demo1' });  
+});
+
 router.get('/getDeviceList',function(req,res){
   model.Device.findAll().then(function(ret){
     res.send(ret);
