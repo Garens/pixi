@@ -8,11 +8,17 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/demo1', function(req, res, next) {
-  res.render('demo1', { title: 'demo1' });  
+  res.render('demo1', { title: 'demo1' });
 });
 
 router.get('/getDeviceList',function(req,res){
   model.Device.findAll().then(function(ret){
+    if(!ret){
+      return res.send([]);
+    }
+    for(var i in ret){
+      ret[i].data = JSON.parse(ret[i].data);
+    }
     res.send(ret);
   }).catch(function(err){
     console.log('error:' + err);

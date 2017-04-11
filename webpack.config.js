@@ -6,13 +6,20 @@ module.exports = {
   output: {
     path: path.resolve(__dirname,'dist'),
     filename: 'js/[name].bundle.js',
+    // publicPath: '/assets/',
     library: 'Scada',
     libraryTarget: 'umd'
   },
+  devServer: {
+        historyApiFallback: true,
+        hot: false,
+        inline: true,
+        grogress: true
+    },
   plugins: [
     new htmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
+      filename: 'homepage.html',
+      template: 'template.html',
       inject: 'head'
     })
   ]
