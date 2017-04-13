@@ -17,11 +17,11 @@ router.get('/getDeviceList',function(req,res){
       return res.send([]);
     }
     for(var i in ret){
-      ret[i].data = JSON.parse(ret[i].data);
+      ret[i].data = JSON.parse(ret[i].data.toString('utf-8'));
     }
     res.send(ret);
   }).catch(function(err){
-    console.log('error:' + err);
+    console.log('error1:' + err);
   })
 })
 

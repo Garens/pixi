@@ -73,63 +73,11 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/**
- * @author Garens
- * @date 2017年4月7日10:12:15
- */
- var EventEmitter = __webpack_require__(2);
-
-class Scada extends EventEmitter
-{
-  constructor(objs) {
-    super();
-    this.objects = objs;
-  }
-
-  init(objs) {
-    this.objects = objs;
-  }
-
-  get objects()
-  {
-    return this._objects;
-  }
-
-  set objects(arr)
-  {
-    this._objects = arr;
-  }
-
-}
-
-// function Scada(){
-//   console.log(123);
-// }
-// Scada.prototype.init = function(objs){
-//   this.objs = objs;
-//   console.log(1);
-// }
-//
-module.exports = Scada;
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(0);
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -444,6 +392,101 @@ EventEmitter.EventEmitter = EventEmitter;
 if (true) {
   module.exports = EventEmitter;
 }
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/**
+ * @author Garens
+ * @date 2017年4月7日10:12:15
+ */
+ let EventEmitter = __webpack_require__(0);
+ let RenderPath = __webpack_require__(2);
+
+
+class Scada extends EventEmitter
+{
+  constructor(objs) {
+    super();
+    this.objects = objs;
+  }
+
+  init(objs) {
+    this.objects = objs;
+    this.distCenter();
+  }
+
+  distCenter() {
+    let objs = this.objects;
+    for(var i in objs) {
+      this.emit(objs[i].type,objs[i].data);
+      // switch (objs[i].type) {
+      //   case 'path':
+      //       // new RenderPath(objs[i]);
+      //       this.emit('path',objs[i].data);
+      //     break;
+      //   default:
+      //     break;
+      // }
+    }
+  }
+
+  /**
+   * 此处必须要设置为this._objects，否则会Uncaught RangeError: Maximum call stack size exceeded错误
+   * @return {Array} objects
+   */
+  get objects()
+  {
+    return this._objects;
+  }
+
+  set objects(arr)
+  {
+    this._objects = arr;
+  }
+
+}
+
+// function Scada(){
+//   console.log(123);
+// }
+// Scada.prototype.init = function(objs){
+//   this.objs = objs;
+//   console.log(1);
+// }
+//
+module.exports = Scada;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+
+let EventEmitter = __webpack_require__(0);
+
+class RenderPath extends EventEmitter
+{
+  constructor(obj) {
+    super();
+    console.log(1234);
+    this.emit('path',obj.data);
+
+  }
+}
+
+module.exports = RenderPath;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(1);
 
 
 /***/ })
