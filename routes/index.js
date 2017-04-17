@@ -17,7 +17,7 @@ router.get('/getDeviceList',function(req,res){
       return res.send([]);
     }
     for(var i in ret){
-      ret[i].data = JSON.parse(ret[i].data.toString('utf-8'));
+      ret[i].data = ret[i].data.toString('utf-8');//JSON.parse(ret[i].data.toString('utf-8'));
     }
     res.send(ret);
   }).catch(function(err){

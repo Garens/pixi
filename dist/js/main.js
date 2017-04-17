@@ -2,15 +2,29 @@
 new Vue({
   el: '#app',
   data:{
+    t1:0,
+    t2:0,
+    t:0
   },
   mounted: function () {
     this.$nextTick(function () {
+      this.startTimer();
       this.initScada();
       this.getObjects();
       this.switchRender();
       this.initPixi();
-      this.testDraw();
+      // this.testDraw();
     })
+  },
+  filters: {
+    /**
+     * 毫秒转秒的过滤器
+     * @param  {Number} time 要格式化的毫秒数
+     * @return {Float}      格式好的两位小数的秒数
+     */
+    formatTime: function(time) {
+      return (time/1000).toFixed(2);
+    }
   },
   methods:{
     initPixi:function(){
@@ -46,6 +60,47 @@ new Vue({
       this.scada.on('rect',function(obj) {
           _this.renderRect(obj);
       });
+      // this.scada.on('path-group',function(obj) {
+      //     _this.renderPathGroup(obj);
+      // });
+      // this.scada.on('svg',function(obj) {
+      //     _this.renderSvg(obj);
+      // });
+    },
+
+    renderPathGroup: function(obj) {
+      console.log(obj);
+      var path = obj.paths;
+      var graphics = new PIXI.Graphics();
+      console.log(path);
+
+      for(var i in path) {
+        var tagName = path[i].type;
+        var type = tagName.charAt(0).toUpperCase() + tagName.slice(1)
+        console.log('draw' + type + 'Node');
+        console.log(SVGGraphics.prototype['draw' + type + 'Node']);
+        SVGGraphics.prototype['draw' + type + 'Node'](path[i]);
+      }
+    },
+
+    renderSvg: function(obj) {
+      // console.log(obj);
+      var svg = this.parseDom(obj);
+      var _svg = '';
+      for(var i in svg){
+        if(svg[i].nodeName == 'svg') {
+          _svg = svg[i];
+        }
+      }
+      var graphics = new PIXI.Graphics();
+
+      this.container.addChild(graphics);
+      SVGGraphics.drawSVG(graphics, _svg);
+      graphics.x = 111;
+      graphics.y = 111;
+      graphics.width = 100;
+      graphics.height = 100;
+      this.app.render(this.container);
     },
 
     /**
@@ -114,6 +169,24 @@ new Vue({
       graphics.scale.x = obj.scaleX;
       graphics.scale.y = obj.scaleY;
       this.app.render(this.container);
+      this.stopTimer();
+      // document.getElementById('timeLine').innerHtml(this.stopTimer);
+    },
+
+    startTimer () {
+      this.t1 = new Date().getTime();
+      return this.t1;
+    },
+    stopTimer () {
+      this.t2 = new Date().getTime();
+      this.t = this.t2 - this.t1;
+      return this.t;
+    },
+    parseDom: function(arg) {
+      var objE = document.createElement("div");
+      objE.innerHTML = arg;
+      console.log(objE);
+      return objE.childNodes;
     },
 
     /**
@@ -122,7 +195,7 @@ new Vue({
      */
     testDraw() {
       var _this = this;
-      for (var i = 0; i < 100000; i++) {
+      for (var i = 0; i < 1000; i++) {
           createBunny(
               Math.floor(Math.random() * 1400),
               Math.floor(Math.random() * 800)

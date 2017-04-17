@@ -4,7 +4,7 @@
  * @date 2017年4月7日10:12:15
  */
  let EventEmitter = require('eventemitter3');
- let RenderPath = require('./RenderPath');
+ // let RenderPath = require('./RenderPath');
 
 
 class Scada extends EventEmitter
@@ -22,6 +22,9 @@ class Scada extends EventEmitter
   distCenter() {
     let objs = this.objects;
     for(var i in objs) {
+      if(objs[i].type != 'svg') {
+        objs[i].data = JSON.parse(objs[i].data);
+      }
       this.emit(objs[i].type,objs[i].data);
       // switch (objs[i].type) {
       //   case 'path':
